@@ -1,0 +1,10 @@
+#!/bin/sh
+#
+# board specific extras init
+#------------------------------------------------------------------------------
+
+# Only start OSD when airframe wants it so
+if param compare OSD_ATXXXX_CFG 1
+then
+	atxxxx start -s
+fi

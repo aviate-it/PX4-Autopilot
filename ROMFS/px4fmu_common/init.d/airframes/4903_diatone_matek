@@ -1,0 +1,62 @@
+#!/bin/sh
+#
+# @name Diatone with Matek H743-Slim-V1.5
+#
+# @type Quadrotor x
+# @class Copter
+#
+# @maintainer Michael Melchior <michael@aviate-it.com>
+#
+# todo: check meaning of @board settings!
+# @board px4_fmu-v2 exclude
+# @board px4_fmu-v3 exclude
+# @board px4_fmu-v4 exclude
+# @board px4_fmu-v4pro exclude
+# @board px4_fmu-v5 exclude
+# @board px4_fmu-v5x exclude
+#
+. ${R}etc/init.d/rc.mc_defaults
+
+# Roll 180
+param set-default SENS_BOARD_ROT 8
+
+# system_power unavailable
+param set-default CBRK_SUPPLY_CHK 894281
+
+# the startup tune is not great on a binary output buzzer, so disable it
+param set-default CBRK_BUZZER 782090
+
+
+param set-default BAT1_V_DIV 11
+param set-default BAT1_A_PER_V 40
+
+param set-default BAT2_V_DIV 11
+param set-default BAT2_A_PER_V 40
+
+
+param set-default SYS_HAS_MAG 0
+
+
+param set-default EKF2_MAG_TYPE 5
+param set-default IMU_GYRO_RATEMAX 400
+
+# Motor 3
+param set-default PWM_MAIN_FUNC1 103
+# Motor 2
+param set-default PWM_MAIN_FUNC2 102
+#Motor 1
+param set-default PWM_MAIN_FUNC3 101
+#Motor 4
+param set-default PWM_MAIN_FUNC4 104
+
+# DShot1200
+param set-default PWM_MAIN_TIM0 -2
+# DShot1200
+param set-default PWM_MAIN_TIM1 -2
+
+# Crossfire 8CH
+param set-default RC_CHAN_CNT 8
+# Crossfire
+param set-default RC_INPUT_PROTO 6
+
+mavlink start -d /dev/ttyS5 -b 3000000 -r 290000 -m onboard -x -z

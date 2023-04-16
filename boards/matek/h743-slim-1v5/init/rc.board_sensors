@@ -1,0 +1,15 @@
+#!/bin/sh
+#
+# Matek H743 Slim V1.5 specific sensors init
+#------------------------------------------------------------------------------
+
+board_adc start
+
+# Internal SPI1 bus MPU-6000
+mpu6000 -R 12 -s start
+
+# Internal SPI4 bus ICM-42605
+icm42605 -R 14 -s start
+
+# Internal I2C2 DPS310 0x76
+dps310 -I start -a 118
