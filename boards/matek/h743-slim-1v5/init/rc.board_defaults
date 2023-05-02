@@ -2,51 +2,48 @@
 #
 # board specific defaults
 #------------------------------------------------------------------------------
+# ref. https://docs.px4.io/main/en/advanced_config/parameter_reference.html
 
+# ref. http://www.mateksys.com/?portfolio=h743-slim
 param set-default BAT1_V_DIV 11
 param set-default BAT1_A_PER_V 40
 
-param set-default BAT2_V_DIV 11
-param set-default BAT2_A_PER_V 40
-
+param set-default BAT2_V_DIV 21
+param set-default BAT2_A_PER_V 1
 
 
 # todo: export all custom settings to airframe configuration as soon as BL is working correctly
 
-# Roll 180
-param set-default SENS_BOARD_ROT 8
+# # ref. https://docs.px4.io/main/en/advanced_config/advanced_flight_controller_orientation_leveling.html
+# # Roll 180
+# param set-default SENS_BOARD_ROT 8
 
 # system_power unavailable
-param set-default CBRK_SUPPLY_CHK 894281
+# param set-default CBRK_SUPPLY_CHK 894281
 
 # the startup tune is not great on a binary output buzzer, so disable it
 param set-default CBRK_BUZZER 782090
 
+# param set-default SYS_HAS_MAG 0
 
-param set-default SYS_HAS_MAG 0
+# param set-default EKF2_MAG_TYPE 5
+# param set-default IMU_GYRO_RATEMAX 400
 
+# # Motor 3
+# param set-default PWM_MAIN_FUNC1 103
+# # Motor 2
+# param set-default PWM_MAIN_FUNC2 102
+# #Motor 1
+# param set-default PWM_MAIN_FUNC3 101
+# #Motor 4
+# param set-default PWM_MAIN_FUNC4 104
 
-param set-default EKF2_MAG_TYPE 5
-param set-default IMU_GYRO_RATEMAX 400
+# # -1 = OneShot
+# param set-default PWM_MAIN_TIM0 -1
+# # -1 = OneShot
+# param set-default PWM_MAIN_TIM1 -1
 
-# Motor 3
-param set-default PWM_MAIN_FUNC1 103
-# Motor 2
-param set-default PWM_MAIN_FUNC2 102
-#Motor 1
-param set-default PWM_MAIN_FUNC3 101
-#Motor 4
-param set-default PWM_MAIN_FUNC4 104
-
-# DShot1200
-param set-default PWM_MAIN_TIM0 -2
-# DShot1200
-param set-default PWM_MAIN_TIM1 -2
-
-# Crossfire 8CH
-param set-default RC_CHAN_CNT 8
-# Crossfire
-param set-default RC_INPUT_PROTO 6
-
-
-
+# # Crossfire 8CH
+# param set-default RC_CHAN_CNT 8
+# # 6 = RC_SCAN_CRSF
+# param set-default RC_INPUT_PROTO 6

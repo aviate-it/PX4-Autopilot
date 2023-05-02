@@ -61,5 +61,10 @@ extern "C" __EXPORT int usb_connected_main(int argc, char *argv[])
 		return 0;
 	}
 
+#if !defined(BOARD_USB_VBUS_SENSE_DISABLED)
 	return board_read_VBUS_state();
+#else
+	PX4_INFO_RAW("USB VBUS SENSE DISABLED\n");
+	return 1;
+#endif
 }

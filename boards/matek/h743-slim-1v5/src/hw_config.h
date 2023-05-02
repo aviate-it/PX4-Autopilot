@@ -31,7 +31,8 @@
  *
  ****************************************************************************/
 
-#pragma once
+#ifndef HW_CONFIG_H_
+#define HW_CONFIG_H_
 
 /****************************************************************************
  * 10-8--2016:
@@ -92,13 +93,13 @@
 #define INTERFACE_USB_CONFIG           "/dev/ttyACM0"
 
 // this definition will trigger reading VBUS
-// since Matek H743 Slim V1.5 doesn't have a VBUS Pin (PA9 is taken by UART1)
+// since Matek H743 Slim V1.5 doesn't have a VBUS Pin (PA9 is taken by UART1 and PE2 is taken by SPI3 CS2)
 // this definition should be avoided to start bootloader regardless
 // ref. /platforms/nuttx/src/bootloader/stm/stm32_common/main.c
-//#define BOARD_VBUS                     MK_GPIO_INPUT(GPIO_OTGFS_VBUS)
+#define BOARD_VBUS                     MK_GPIO_INPUT(GPIO_OTGFS_VBUS)
 
 #define INTERFACE_USART                1
-#define INTERFACE_USART_CONFIG         "/dev/ttyS0,57600"
+#define INTERFACE_USART_CONFIG         "/dev/ttyS0,115200"
 #define BOOT_DELAY_ADDRESS             0x000001a0
 #define BOARD_TYPE                     1013
 
@@ -138,3 +139,5 @@
 #ifndef BOOT_DEVICES_FILTER_ONUSB
 #  define BOOT_DEVICES_FILTER_ONUSB USB0_DEV|SERIAL0_DEV|SERIAL1_DEV
 #endif
+
+#endif /* HW_CONFIG_H_ */

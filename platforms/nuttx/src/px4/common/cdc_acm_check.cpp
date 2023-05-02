@@ -89,7 +89,14 @@ static void mavlink_usb_check(void *arg)
 	uORB::SubscriptionData<actuator_armed_s> actuator_armed_sub{ORB_ID(actuator_armed)};
 
 	const bool armed = actuator_armed_sub.get().armed;
-	bool vbus_present = (board_read_VBUS_state() == PX4_OK);
+
+	// if no vbus sensing is set, start with BL by default
+	bool vbus_present = true;
+
+#if !defined(BOARD_USB_VBUS_SENSE_DISABLED)
+	vbus_present = (board_read_VBUS_state() == PX4_OK);
+#endif
+
 	bool locked_out = false;
 
 	// If the hardware support RESET lockout that has nArmed ANDed with VBUS

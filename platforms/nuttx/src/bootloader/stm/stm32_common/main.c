@@ -268,14 +268,14 @@ board_init(void)
 #endif
 
 #if INTERFACE_USB
-#if !defined(BOARD_USB_VBUS_SENSE_DISABLED)
+#  if !defined(BOARD_USB_VBUS_SENSE_DISABLED)
 	/* enable configured GPIO to sample VBUS */
-#  if defined(USE_VBUS_PULL_DOWN)
+#    if defined(USE_VBUS_PULL_DOWN)
 	px4_arch_configgpio((GPIO_OTGFS_VBUS & GPIO_PUPD_MASK) | GPIO_PULLDOWN);
-#  else
+#    else
 	px4_arch_configgpio((GPIO_OTGFS_VBUS & GPIO_PUPD_MASK) | GPIO_FLOAT);
+#    endif
 #  endif
-#endif
 #endif
 
 #if INTERFACE_USART
@@ -310,8 +310,10 @@ board_deinit(void)
 #endif
 
 #if INTERFACE_USB
+#  if !defined(BOARD_USB_VBUS_SENSE_DISABLED)
 	px4_arch_configgpio(MK_GPIO_INPUT(GPIO_OTGFS_VBUS));
 	putreg32(RCC_AHB1RSTR_OTGFSRST, STM32_RCC_AHB1RSTR);
+#  endif
 #endif
 
 #if defined(BOARD_FORCE_BL_PIN_IN) && defined(BOARD_FORCE_BL_PIN_OUT)

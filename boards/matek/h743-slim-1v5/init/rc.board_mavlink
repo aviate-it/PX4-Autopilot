@@ -7,5 +7,5 @@
 
 # start mavlink on UART7 for companion computer
 # ref https://docs.px4.io/main/en/hardware/serial_port_mapping.html for port mapping
-# ref https://dev.px4.io/master/en/middleware/modules_communication.html for command reference
-mavlink start -d /dev/ttyS5 -b 3000000 -r 290000 -m onboard -x -z
+# ref https://dev.px4.io/master/en/middleware/modules_communication.html#mavlink for command reference
+mavlink start -d /dev/ttyS5 -b 3000000 -r 290000 -m onboard

@@ -63,8 +63,8 @@
 #define GPIO_nLED_GREEN                 /* PE4 */  (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_50MHz|GPIO_OUTPUT_SET|GPIO_PORTE|GPIO_PIN4)
 
 #define BOARD_HAS_CONTROL_STATUS_LEDS   1
-#define BOARD_ARMED_STATE_LED           BOARD_LED_GREEN
-#define BOARD_OVERLOAD_LED              BOARD_LED_BLUE
+#define BOARD_ARMED_STATE_LED		BOARD_LED_GREEN
+#define BOARD_ARMED_LED			BOARD_LED_BLUE
 
 
 /*
@@ -94,6 +94,7 @@
 #define ADC_AIRSPEED_IN_CHANNEL         /* PC4  */  ADC1_CH(4)
 #define ADC_RSSI_IN_CHANNEL             /* PC5  */  ADC1_CH(8)
 
+/*
 #define ADC_CHANNELS \
 	((1 << ADC_BATTERY_VOLTAGE_CHANNEL) | \
 	 (1 << ADC_BATTERY_CURRENT_CHANNEL) | \
@@ -101,13 +102,19 @@
 	 (1 << ADC_BATTERY2_CURRENT_CHANNEL) | \
 	 (1 << ADC_AIRSPEED_IN_CHANNEL) | \
 	 (1 << ADC_RSSI_IN_CHANNEL))
+*/
+
+#define ADC_CHANNELS \
+	((1 << ADC_BATTERY_VOLTAGE_CHANNEL) | \
+	 (1 << ADC_BATTERY_CURRENT_CHANNEL))
 
 /* CAN Silence
  *
  * Silent mode control \ ESC Mux select
+ * Only reference in tap_esc_common.cpp
  */
 
-#define GPIO_CAN1_SILENT_S0             /* PD3  */ (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_2MHz|GPIO_OUTPUT_CLEAR|GPIO_PORTD|GPIO_PIN3)
+// #define GPIO_CAN1_SILENT_S0             /* PD3  */ (GPIO_OUTPUT|GPIO_PUSHPULL|GPIO_SPEED_2MHz|GPIO_OUTPUT_CLEAR|GPIO_PORTD|GPIO_PIN3)
 
 
 /* PWM
@@ -115,7 +122,7 @@
 #define DIRECT_PWM_OUTPUT_CHANNELS      12
 #define DIRECT_INPUT_TIMER_CHANNELS     12
 
-#define BOARD_HAS_PWM  DIRECT_PWM_OUTPUT_CHANNELS
+#define BOARD_HAS_PWM  			DIRECT_PWM_OUTPUT_CHANNELS
 
 
 /* Spare GPIO */
@@ -138,21 +145,21 @@
  *
  * PE2  OTG_FS_VBUS VBUS sensing
  */
-#define BOARD_USB_VBUS_SENSE_DISABLED
-// 1: PE2 is already assigned to external CS2
-// 2: PA9 is already taken by UART1_TX
+// #define BOARD_USB_VBUS_SENSE_DISABLED
+// 1: PE2 is assigned to external CS2
+// 2: PA9 is assigned to USART1_TX
 // 3: Only required by usb.c when CONFIG_STM32F7_OTGFS is defined in defconfig, which is NOT the case
 // 4: Still required by board_common, otherwise the following errors will be raised:
 // src/systemcmds/usb_connected/usb_connected.cpp:64: undefined reference to `board_read_VBUS_state'
 // platforms/nuttx/src/px4/common/cdc_acm_check.cpp:94: undefined reference to `board_read_VBUS_state'
 // 5: If you can't solve it in software, do it in hardware:
-// 5V pins are only powered when battery is on, thus added a voltage divider to connect to PE2
-// #define GPIO_OTGFS_VBUS         /* PE2 */ (GPIO_INPUT|GPIO_PULLDOWN|GPIO_SPEED_100MHz|GPIO_PORTE|GPIO_PIN2)
+// Connect Vbus to CS2
+#define GPIO_OTGFS_VBUS			/* PE2 */ (GPIO_INPUT|GPIO_PULLDOWN|GPIO_SPEED_100MHz|GPIO_PORTE|GPIO_PIN2)
 
 /* High-resolution timer */
 // why does the comment state timer8 / channel 3?
-#define HRT_TIMER                       /* use timer2 for the HRT */ 2
-#define HRT_TIMER_CHANNEL               /* use capture/compare channel 1 */ 1
+#define HRT_TIMER			2   /* use timer2 for the HRT */
+#define HRT_TIMER_CHANNEL		1   /* use capture/compare channel 1 */
 
 
 /* RC Serial port */
@@ -173,11 +180,12 @@
 #define BOARD_HAS_ON_RESET 1
 
 
+// GPIO_OTGFS_VBUS
+// GPIO_CAN1_SILENT_S0
 #define PX4_GPIO_INIT_LIST { \
 		PX4_ADC_GPIO, \
 		GPIO_CAN1_TX, \
 		GPIO_CAN1_RX, \
-		GPIO_CAN1_SILENT_S0, \
 		GPIO_nLED_BLUE, \
 		GPIO_nLED_GREEN, \
 		GPIO_TONE_ALARM_IDLE, \

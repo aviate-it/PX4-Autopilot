@@ -6,10 +6,15 @@
 board_adc start
 
 # Internal SPI1 bus MPU-6000
+# 12 Pitch 180°
+# ref. https://dev.px4.io/master/en/middleware/modules_driver_imu.html#mpu6000
 mpu6000 -R 12 -s start
 
 # Internal SPI4 bus ICM-42605
+# 14 Roll 180°, Yaw 270°
+# https://dev.px4.io/master/en/middleware/modules_driver_imu.html#icm42605
 icm42605 -R 14 -s start
 
 # Internal I2C2 DPS310 0x76
+# ref. https://dev.px4.io/master/en/middleware/modules_driver_baro.html#dps310
 dps310 -I start -a 118
