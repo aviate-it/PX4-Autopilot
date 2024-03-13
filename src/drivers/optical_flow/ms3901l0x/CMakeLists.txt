@@ -30,14 +30,16 @@
 # POSSIBILITY OF SUCH DAMAGE.
 #
 ############################################################################
-
-px4_add_library(arch_board_critmon
-	board_critmon.c
-)
-
-// todo: check how and why
-# add_subdirectory(ms3901l0x)
-# add_subdirectory(paw3902)
-# add_subdirectory(pmw3901)
-# add_subdirectory(px4flow)
-# add_subdirectory(thoneflow)
+px4_add_module(
+	MODULE drivers__ms3901l0x
+	MAIN ms3901l0x
+	SRCS
+		ms3901l0x.cpp
+		ms3901l0x.hpp
+		ms3901l0x_main.cpp
+		ms3901l0x_parser.cpp
+	MODULE_CONFIG
+		module.yaml
+	DEPENDS
+		drivers_rangefinder
+	)

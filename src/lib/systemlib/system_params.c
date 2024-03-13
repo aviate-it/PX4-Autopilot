@@ -37,6 +37,8 @@
  * System wide parameters
  */
 
+#include "system_params.h"
+
 /**
  * Auto-start script index.
  *

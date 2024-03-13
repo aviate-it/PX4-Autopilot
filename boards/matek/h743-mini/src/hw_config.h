@@ -90,7 +90,12 @@
 #define BOOTLOADER_DELAY               5000
 #define INTERFACE_USB                  1
 #define INTERFACE_USB_CONFIG           "/dev/ttyACM0"
-#define BOARD_VBUS                     MK_GPIO_INPUT(GPIO_OTGFS_VBUS)
+
+// this definition will trigger reading VBUS
+// since Matek H743 Slim V1.5 doesn't have a VBUS Pin (PA9 is taken by UART1 and PE2 is taken by SPI3 CS2)
+// this definition should be avoided to start bootloader regardless
+// ref. /platforms/nuttx/src/bootloader/stm/stm32_common/main.c
+// #define BOARD_VBUS                     MK_GPIO_INPUT(GPIO_OTGFS_VBUS)
 
 //#define USE_VBUS_PULL_DOWN
 #define INTERFACE_USART                1

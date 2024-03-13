@@ -61,6 +61,27 @@ transition_result_t ArmStateMachine::arming_state_transition(vehicle_status_s &s
 		// Preflight check
 		if (valid_transition
 		    && (new_arming_state == vehicle_status_s::ARMING_STATE_ARMED)
+// todo: check how and why
+		// /*
+		//  * Get sensing state if necessary
+		//  */
+		// bool preflight_check_ret = true;
+
+		// /* only perform the pre-arm check if we have to */
+		// if (fRunPreArmChecks && (new_arming_state == vehicle_status_s::ARMING_STATE_ARMED) && !hil_enabled) {
+
+		// 	preflight_check_ret = PreFlightCheck::preflightCheck(mavlink_log_pub, status, status_flags, control_mode,
+		// 			      true, true, time_since_boot);
+
+		// 	if (preflight_check_ret) {
+		// 		status_flags.system_sensors_initialized = true;
+		// 	}
+
+		// 	feedback_provided = true;
+		// }
+
+		// /* re-run the pre-flight check as long as sensors are failing */
+		// if (!status_flags.system_sensors_initialized
 		    && fRunPreArmChecks
 		    && !(status.hil_state == vehicle_status_s::HIL_STATE_ON)
 		    && (_arm_state != vehicle_status_s::ARMING_STATE_IN_AIR_RESTORE)) {
@@ -70,6 +91,38 @@ transition_result_t ArmStateMachine::arming_state_transition(vehicle_status_s &s
 			if (!checks.canArm(status.nav_state)) {
 				feedback_provided = true; // Preflight checks report error messages
 				valid_transition = false;
+// todo: check how and why
+		// 		status_flags.system_sensors_initialized = PreFlightCheck::preflightCheck(mavlink_log_pub, status,
+		// 				status_flags, control_mode, false, status.arming_state != vehicle_status_s::ARMING_STATE_ARMED, time_since_boot);
+
+		// 		_last_preflight_check = hrt_absolute_time();
+		// 	}
+		// }
+
+		// // Check that we have a valid state transition
+		// bool valid_transition = arming_transitions[new_arming_state][status.arming_state];
+
+		// if (valid_transition) {
+		// 	// We have a good transition. Now perform any secondary validation.
+		// 	if (new_arming_state == vehicle_status_s::ARMING_STATE_ARMED) {
+
+		// 		//      Do not perform pre-arm checks if coming from in air restore
+		// 		//      Allow if vehicle_status_s::HIL_STATE_ON
+		// 		if (status.arming_state != vehicle_status_s::ARMING_STATE_IN_AIR_RESTORE) {
+
+		// 			bool prearm_check_ret = true;
+
+		// 			if (fRunPreArmChecks && preflight_check_ret) {
+		// 				// only bother running prearm if preflight was successful
+		// 				prearm_check_ret = PreFlightCheck::preArmCheck(mavlink_log_pub, status_flags, control_mode, safety, arm_requirements, status);
+		// 			}
+
+		// 			if (!preflight_check_ret || !prearm_check_ret) {
+		// 				// the prearm and preflight checks already print the rejection reason
+		// 				feedback_provided = true;
+		// 				valid_transition = false;
+		// 			}
+		// 		}
 			}
 		}
 

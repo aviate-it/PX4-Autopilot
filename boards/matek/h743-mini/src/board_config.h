@@ -148,9 +148,18 @@
  *
  * PE2  OTG_FS_VBUS VBUS sensing
  */
-
 #define GPIO_OTGFS_VBUS         /* PE2 */ (GPIO_INPUT|GPIO_PULLDOWN|GPIO_SPEED_100MHz|GPIO_PORTE|GPIO_PIN2)
 
+// #define BOARD_USB_VBUS_SENSE_DISABLED
+// // 1: PE2 is assigned to external CS2
+// // 2: PA9 is assigned to USART1_TX
+// // 3: Only required by usb.c when CONFIG_STM32F7_OTGFS is defined in defconfig, which is NOT the case
+// // 4: Still required by board_common, otherwise the following errors will be raised:
+// // src/systemcmds/usb_connected/usb_connected.cpp:64: undefined reference to `board_read_VBUS_state'
+// // platforms/nuttx/src/px4/common/cdc_acm_check.cpp:94: undefined reference to `board_read_VBUS_state'
+// // 5: If you can't solve it in software, do it in hardware:
+// // Connect Vbus to CS2
+// // #define GPIO_OTGFS_VBUS			/* PE2 */ (GPIO_INPUT|GPIO_PULLDOWN|GPIO_SPEED_100MHz|GPIO_PORTE|GPIO_PIN2)
 
 /* High-resolution timer */
 #define HRT_TIMER               2  /* use timer8 for the HRT */

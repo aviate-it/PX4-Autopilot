@@ -1,0 +1,5 @@
+menuconfig DRIVERS_OPTICAL_FLOW_MS3901L0X
+	bool "MS3901L0X"
+	default n
+	---help---
+		Enable support for Mateksys 3901-L0X

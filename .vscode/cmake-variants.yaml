@@ -216,6 +216,16 @@ CONFIG:
       buildType: MinSizeRel
       settings:
         CONFIG: matek_h743-slim_default
+    matek_h743-slim-1v5_default:
+      short: matek_h743-slim-1v5
+      buildType: MinSizeRel
+      settings:
+        CONFIG: matek_h743-slim-1v5_default
+    matek_h743-slim-3v0_default:
+      short: matek_h743-slim-3v0
+      buildType: MinSizeRel
+      settings:
+        CONFIG: matek_h743-slim-3v0_default
     matek_gnss-m9n-f4_canbootloader:
       short: matek_gnss-m9n-f4_canbootloader
       buildType: MiniSizeRel

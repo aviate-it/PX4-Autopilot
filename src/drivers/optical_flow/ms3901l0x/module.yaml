@@ -1,0 +1,6 @@
+module_name: Mateksys 3901-L0X optical flow sensor
+serial_config:
+    - command: ms3901l0x start -d ${SERIAL_DEV}
+      port_config_param:
+        name: SENS_MS3901_CFG
+        group: Sensors
